@@ -1,8 +1,8 @@
-import data from './input-day2.js';
+import data from './input-day2.mjs';
+
+execute();
 
 function execute(){
-    console.log("execute")
- 
     var arr = [];
     let directions = [];
     let depthnumbers = [];
@@ -17,12 +17,11 @@ function execute(){
         }  
     }
 
-    let result1 = dayTwoPusselOne(directions, depthnumbers);
-    let result2 = dayTwoPusselTwo(directions , depthnumbers);
-    var div = document.getElementById("PoD2-1");
-    div.innerHTML = result1;
-    var div2 = document.getElementById("PoD2-2");
-    div2.innerHTML = result2;
+     let result1 = dayTwoPusselOne(directions, depthnumbers);
+     let result2 = dayTwoPusselTwo(directions , depthnumbers);
+
+    console.log("Event 1 : " + result1);
+    console.log("Event 2 : " + result2);
 }
 
 function dayTwoPusselOne(directions, depthnumbers){
@@ -68,4 +67,3 @@ function dayTwoPusselTwo(directions, depthnumbers){
     return (forward * depth);
 }
 
-export default execute();

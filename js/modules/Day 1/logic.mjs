@@ -1,4 +1,4 @@
-import number from './input-day1.js';
+import number from './input-day1.mjs';
 
 
  // A = 477
@@ -21,11 +21,8 @@ function numberArray(){
     let result1 = pussel1(arr);
     let result2 = threeMeasurment(arr);
     
-
-    var div = document.getElementById("PoD1-1");
-    div.innerHTML = result1;
-    var div2 = document.getElementById("PoD1-2");
-    div2.innerHTML = result2;
+    console.log("Event 1 : " + result1);
+    console.log("Event 2 : " + result2);
 }
 
 function pussel1(arr){
