@@ -1,0 +1,14 @@
+C:\Dev\Advent of Code 2021\js\modules\Day 4\Day4\Day4\obj\Debug\netcoreapp3.1\Day4.csproj.AssemblyReference.cache
+C:\Dev\Advent of Code 2021\js\modules\Day 4\Day4\Day4\obj\Debug\netcoreapp3.1\Day4.GeneratedMSBuildEditorConfig.editorconfig
+C:\Dev\Advent of Code 2021\js\modules\Day 4\Day4\Day4\obj\Debug\netcoreapp3.1\Day4.AssemblyInfoInputs.cache
+C:\Dev\Advent of Code 2021\js\modules\Day 4\Day4\Day4\obj\Debug\netcoreapp3.1\Day4.AssemblyInfo.cs
+C:\Dev\Advent of Code 2021\js\modules\Day 4\Day4\Day4\obj\Debug\netcoreapp3.1\Day4.csproj.CoreCompileInputs.cache
+C:\Dev\Advent of Code 2021\js\modules\Day 4\Day4\Day4\bin\Debug\netcoreapp3.1\Day4.exe
+C:\Dev\Advent of Code 2021\js\modules\Day 4\Day4\Day4\bin\Debug\netcoreapp3.1\Day4.deps.json
+C:\Dev\Advent of Code 2021\js\modules\Day 4\Day4\Day4\bin\Debug\netcoreapp3.1\Day4.runtimeconfig.json
+C:\Dev\Advent of Code 2021\js\modules\Day 4\Day4\Day4\bin\Debug\netcoreapp3.1\Day4.runtimeconfig.dev.json
+C:\Dev\Advent of Code 2021\js\modules\Day 4\Day4\Day4\bin\Debug\netcoreapp3.1\Day4.dll
+C:\Dev\Advent of Code 2021\js\modules\Day 4\Day4\Day4\bin\Debug\netcoreapp3.1\Day4.pdb
+C:\Dev\Advent of Code 2021\js\modules\Day 4\Day4\Day4\obj\Debug\netcoreapp3.1\Day4.dll
+C:\Dev\Advent of Code 2021\js\modules\Day 4\Day4\Day4\obj\Debug\netcoreapp3.1\Day4.pdb
+C:\Dev\Advent of Code 2021\js\modules\Day 4\Day4\Day4\obj\Debug\netcoreapp3.1\Day4.genruntimeconfig.cache
