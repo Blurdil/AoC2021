@@ -1,0 +1,15 @@
+C:\Dev\Advent of Code 2021\js\modules\Day 6\Day6\Day6\bin\Debug\net6.0\Day6.exe
+C:\Dev\Advent of Code 2021\js\modules\Day 6\Day6\Day6\bin\Debug\net6.0\Day6.deps.json
+C:\Dev\Advent of Code 2021\js\modules\Day 6\Day6\Day6\bin\Debug\net6.0\Day6.runtimeconfig.json
+C:\Dev\Advent of Code 2021\js\modules\Day 6\Day6\Day6\bin\Debug\net6.0\Day6.dll
+C:\Dev\Advent of Code 2021\js\modules\Day 6\Day6\Day6\bin\Debug\net6.0\ref\Day6.dll
+C:\Dev\Advent of Code 2021\js\modules\Day 6\Day6\Day6\bin\Debug\net6.0\Day6.pdb
+C:\Dev\Advent of Code 2021\js\modules\Day 6\Day6\Day6\obj\Debug\net6.0\Day6.csproj.AssemblyReference.cache
+C:\Dev\Advent of Code 2021\js\modules\Day 6\Day6\Day6\obj\Debug\net6.0\Day6.GeneratedMSBuildEditorConfig.editorconfig
+C:\Dev\Advent of Code 2021\js\modules\Day 6\Day6\Day6\obj\Debug\net6.0\Day6.AssemblyInfoInputs.cache
+C:\Dev\Advent of Code 2021\js\modules\Day 6\Day6\Day6\obj\Debug\net6.0\Day6.AssemblyInfo.cs
+C:\Dev\Advent of Code 2021\js\modules\Day 6\Day6\Day6\obj\Debug\net6.0\Day6.csproj.CoreCompileInputs.cache
+C:\Dev\Advent of Code 2021\js\modules\Day 6\Day6\Day6\obj\Debug\net6.0\Day6.dll
+C:\Dev\Advent of Code 2021\js\modules\Day 6\Day6\Day6\obj\Debug\net6.0\ref\Day6.dll
+C:\Dev\Advent of Code 2021\js\modules\Day 6\Day6\Day6\obj\Debug\net6.0\Day6.pdb
+C:\Dev\Advent of Code 2021\js\modules\Day 6\Day6\Day6\obj\Debug\net6.0\Day6.genruntimeconfig.cache
