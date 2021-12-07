@@ -1,17 +1,17 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
-Execute();
+Execute2();
 
- static void Execute()
+static void Execute()
 {
-    var input = strings.input.Replace("->","").Replace("\r\n", " ").Trim().Split(' ', StringSplitOptions.RemoveEmptyEntries);
+    var input = strings.input.Replace("->", "").Replace("\r\n", " ").Trim().Split(' ', StringSplitOptions.RemoveEmptyEntries);
     //var input = strings.input.Split("->", StringSplitOptions.RemoveEmptyEntries);
 
     var start = new List<cordinate>();
     var end = new List<cordinate>();
     Board board = new Board();
     board.Cells = new List<cordinate>();
-    for(var i = 0; i < input.Length; i++)
+    for (var i = 0; i < input.Length; i++)
     {
         var a = input[i].Split(',');
         var c = new cordinate();
@@ -26,13 +26,13 @@ Execute();
             end.Add(c);
         }
     }
-    for(var i =0; i < start.Count; i++)
+    for (var i = 0; i < start.Count; i++)
     {
-       if(start[i].x == end[i].x)
+        if (start[i].x == end[i].x)
         {
             int startCount = 0;
             int endCount = 0;
-            if(start[i].y > end[i].y)
+            if (start[i].y > end[i].y)
             {
                 startCount = end[i].y;
                 endCount = start[i].y;
@@ -42,21 +42,17 @@ Execute();
                 startCount = start[i].y;
                 endCount = end[i].y;
             }
-            for(var j = startCount; j <= endCount; j++)
+            for (var j = startCount; j <= endCount; j++)
             {
                 var exist = board.Cells.FirstOrDefault(c => c.x == start[i].x && c.y == j);
-                if(exist != null)
+                if (exist != null)
                 {
-                    exist.hit = exist.hit + 1;
+                    exist.hit++;
                 }
                 else
                 {
-                    cordinate newCell = new cordinate();
-                    newCell.x = start[i].x;
-                    newCell.y = j;
-                    newCell.hit = 1;
-                    board.Cells.Add(newCell);
-                    
+                    board.Cells.Add(Methods.CreateCell(start[i].x, j ));
+
                 }
             }
             ///bygg från y kolla vilken som är lägst av y
@@ -80,15 +76,12 @@ Execute();
                 var exist = board.Cells.FirstOrDefault(c => c.y == start[i].y && c.x == j);
                 if (exist != null)
                 {
-                    exist.hit = exist.hit + 1;
+                    exist.hit++;
                 }
                 else
                 {
-                    cordinate newCell = new cordinate();
-                    newCell.y = start[i].y;
-                    newCell.x = j;
-                    newCell.hit = 1;
-                    board.Cells.Add(newCell);
+                    board.Cells.Add(Methods.CreateCell(j, start[i].y));
+                    
 
                 }
             }
@@ -112,7 +105,7 @@ Execute();
             if (start[i].y > end[i].y)
             {
                 startY = end[i].y;
-                endY = start[i].y; 
+                endY = start[i].y;
             }
             else
             {
@@ -120,22 +113,18 @@ Execute();
                 endY = end[i].y;
             }
             var k = 0;
-            for(var j = startX; j <= endX; j++)
+            for (var j = startX; j <= endX; j++)
             {
                 var thisX = startX + k;
                 var thisY = startY + k;
                 var exist = board.Cells.FirstOrDefault(c => c.y == thisY && c.x == thisX);
                 if (exist != null)
                 {
-                    exist.hit = exist.hit + 1;
+                    exist.hit++;
                 }
                 else
                 {
-                    cordinate newCell = new cordinate();
-                    newCell.y = thisY;
-                    newCell.x = thisX;
-                    newCell.hit = 1;
-                    board.Cells.Add(newCell);
+                    board.Cells.Add(Methods.CreateCell(thisX, thisY));
 
                 }
                 k++;
@@ -144,7 +133,10 @@ Execute();
     }
     board.Cells = board.Cells.OrderBy(x => x.x).ThenBy(x => x.y).ToList();
     var co = board.Cells.Where(x => x.hit > 1).ToList();
+    writeMap(board);
 }
+
+
 
 static void Execute2()
 {
@@ -177,167 +169,243 @@ static void Execute2()
         var travelX = 0;
         var travelY = 0;
 
-        if (start[i].x != end[i].x)
+        int startX = start[i].x;
+        int endX = end[i].x;
+
+        int startY = start[i].y;
+        int endY = end[i].y;
+
+        bool isLinearX = startX > endX || endX > startX;
+        bool isLinearY = startY > endY || endY > startY;
+
+        int stepsX = endX - startX;
+        int stepsY = endY - startY;
+
+        if (isLinearX && startX < endX)
         {
-            travelX = end[i].x - start[i].x;
-            if (travelX < 0) ;
-        }
-        if (start[i].y != end[i].y)
-        {
-            travelY = end[i].y - start[i].y;
-        }
-        if(travelX > -1)
-        {
-            for(var r = 0; r < travelX; r++)
+
+            for (var x = 0; x < stepsX; x++) 
             {
-                var x = start[i].x + r;
-                var y = -1;
-                for(var c = 0; c < travelY; c++)
+                var currentX = start[i].x + x;
+                var currentY = start[i].y;
+                if (stepsY > 0)
                 {
-                    y = start[i].y + c;
+                    currentY = start[i].y + x;
                 }
-                var cord = new cordinate();
-                cord.x = x; 
-                cord.y = y;
-                traveld.Add(cord);
+                
+                var exist = board.Cells.FirstOrDefault(x => x.x == currentX && x.y == currentY);
+                if(exist == null)
+                {
+                    board.Cells.Add(Methods.CreateCell(currentX, currentY));
+                }
+                else
+                {
+                    exist.hit++;
+                }
+                
             }
-        }
-    }
-        //    if(travelX != 0)
-        //    {
-        //        if(travelX > -1)
-        //        {
-        //            for(var startX = 0; startX <= travelX; startX++)
-        //            {
-        //                var cord = new cordinate();
-        //                cord.x = start[i].x + startX;
-        //                if (travelY == 0)
-        //                {
-        //                    cord.y = start[i].y;
-        //                }
-        //                else if (travelY > -1)
-        //                {
-        //                    cord.y = start[i].y + startX;
-        //                }
-        //                else if (travelY < -1)
-        //                {
-        //                    cord.y = start[i].y - startX;
-        //                }
-        //                traveld.Add(cord);
-        //            }
-        //        }
-        //        else
-        //        {
-        //            for (var startX = 0; startX <= travelX; startX++)
-        //            {
-        //                var cord = new cordinate();
-        //                cord.x = start[i].x - startX;
-        //                if(travelY == 0)
-        //                {
-        //                    cord.y = start[i].y;
-        //                }
-        //                else if (travelY > -1)
-        //                {
-        //                    cord.y = start[i].y + startX;
-        //                }
-        //                else if(travelY < -1)
-        //                {
-        //                    cord.y = start[i].y - startX;
-        //                }
-        //                traveld.Add(cord);
-        //            }
-        //        }
-        //    }
-        //    else
-        //    {
-        //        if (travelY > -1)
-        //        {
-        //            for (var startY = 0; startY <= travelY; startY++)
-        //            {
-        //                var cord = new cordinate();
-        //                cord.y = start[i].y - startY;
-        //                if (travelY == 0)
-        //                {
-        //                    cord.x = start[i].x;
-        //                }
-        //                else if (travelY > -1)
-        //                {
-        //                    cord.x = start[i].x + startY;
-        //                }
-        //                else if (travelY < -1)
-        //                {
-        //                    cord.x = start[i].x - startY;
-        //                }
-        //                traveld.Add(cord);
-        //            }
-        //        }
-        //        else
-        //        {
-        //            for (var startY = 0; startY <= travelY; startY++)
-        //            {
-        //                var cord = new cordinate();
-        //                cord.y = start[i].y - startY;
-        //                if (travelY == 0)
-        //                {
-        //                    cord.x = start[i].x;
-        //                }
-        //                else if (travelY > -1)
-        //                {
-        //                    cord.x = start[i].x - startY;
-        //                }
-        //                else if (travelY < -1)
-        //                {
-        //                    cord.x = start[i].x + startY;
-        //                }
-        //                traveld.Add(cord);
-        //            }
-        //        }
-        //    }
 
-        //}
-        foreach (var cell in traveld)
-    {
-        var exist = board.Cells.Where(x => x.x == cell.x && x.y == cell.y).FirstOrDefault();
+        }
+        else if (isLinearY && startY < endY)
+        {
 
-        if (exist == null)
-        {
-            var newCell = new cordinate();
-            newCell.x = cell.x;
-            newCell.y = cell.y;
-            newCell.hit = 1;
-            board.Cells.Add(newCell);
+            for (var x = 0; x < stepsY; x++)
+            {
+                var currentX = start[i].x ;
+                var currentY = start[i].y + x;
+                if (stepsX > 0)
+                {
+                    currentX = start[i].y + x;
+                }
+
+                var exist = board.Cells.FirstOrDefault(x => x.x == currentX && x.y == currentY);
+                if (exist == null)
+                {
+                    board.Cells.Add(Methods.CreateCell(currentX, currentY));
+                }
+                else
+                {
+                    exist.hit++;
+                }
+
+            }
+
         }
-        else
-        {
-            exist.hit = exist.hit + 1;
-            
-        }
+
+        writeMap(board);
     }
+    #region old
+    //if (start[i].x != end[i].x)
+    //{
+    //    travelX = end[i].x - start[i].x;
+    //    if (travelX < 0) ;
+    //}
+    //if (start[i].y != end[i].y)
+    //{
+    //    travelY = end[i].y - start[i].y;
+    //}
+    //    if(travelX > -1)
+    //    {
+    //        for(var r = 0; r < travelX; r++)
+    //        {
+    //            var x = start[i].x + r;
+    //            var y = -1;
+    //            for(var c = 0; c < travelY; c++)
+    //            {
+    //                y = start[i].y + c;
+    //            }
+    //            var cord = new cordinate();
+    //            cord.x = x; 
+    //            cord.y = y;
+    //            traveld.Add(cord);
+    //        }
+    //    }
+    //}
+    //    //    if(travelX != 0)
+    //    //    {
+    //    //        if(travelX > -1)
+    //    //        {
+    //    //            for(var startX = 0; startX <= travelX; startX++)
+    //    //            {
+    //    //                var cord = new cordinate();
+    //    //                cord.x = start[i].x + startX;
+    //    //                if (travelY == 0)
+    //    //                {
+    //    //                    cord.y = start[i].y;
+    //    //                }
+    //    //                else if (travelY > -1)
+    //    //                {
+    //    //                    cord.y = start[i].y + startX;
+    //    //                }
+    //    //                else if (travelY < -1)
+    //    //                {
+    //    //                    cord.y = start[i].y - startX;
+    //    //                }
+    //    //                traveld.Add(cord);
+    //    //            }
+    //    //        }
+    //    //        else
+    //    //        {
+    //    //            for (var startX = 0; startX <= travelX; startX++)
+    //    //            {
+    //    //                var cord = new cordinate();
+    //    //                cord.x = start[i].x - startX;
+    //    //                if(travelY == 0)
+    //    //                {
+    //    //                    cord.y = start[i].y;
+    //    //                }
+    //    //                else if (travelY > -1)
+    //    //                {
+    //    //                    cord.y = start[i].y + startX;
+    //    //                }
+    //    //                else if(travelY < -1)
+    //    //                {
+    //    //                    cord.y = start[i].y - startX;
+    //    //                }
+    //    //                traveld.Add(cord);
+    //    //            }
+    //    //        }
+    //    //    }
+    //    //    else
+    //    //    {
+    //    //        if (travelY > -1)
+    //    //        {
+    //    //            for (var startY = 0; startY <= travelY; startY++)
+    //    //            {
+    //    //                var cord = new cordinate();
+    //    //                cord.y = start[i].y - startY;
+    //    //                if (travelY == 0)
+    //    //                {
+    //    //                    cord.x = start[i].x;
+    //    //                }
+    //    //                else if (travelY > -1)
+    //    //                {
+    //    //                    cord.x = start[i].x + startY;
+    //    //                }
+    //    //                else if (travelY < -1)
+    //    //                {
+    //    //                    cord.x = start[i].x - startY;
+    //    //                }
+    //    //                traveld.Add(cord);
+    //    //            }
+    //    //        }
+    //    //        else
+    //    //        {
+    //    //            for (var startY = 0; startY <= travelY; startY++)
+    //    //            {
+    //    //                var cord = new cordinate();
+    //    //                cord.y = start[i].y - startY;
+    //    //                if (travelY == 0)
+    //    //                {
+    //    //                    cord.x = start[i].x;
+    //    //                }
+    //    //                else if (travelY > -1)
+    //    //                {
+    //    //                    cord.x = start[i].x - startY;
+    //    //                }
+    //    //                else if (travelY < -1)
+    //    //                {
+    //    //                    cord.x = start[i].x + startY;
+    //    //                }
+    //    //                traveld.Add(cord);
+    //    //            }
+    //    //        }
+    //    //    }
+
+    //    //}
+    //    foreach (var cell in traveld)
+    //{
+    //    var exist = board.Cells.Where(x => x.x == cell.x && x.y == cell.y).FirstOrDefault();
+
+    //    if (exist == null)
+    //    {
+    //        var newCell = new cordinate();
+    //        newCell.x = cell.x;
+    //        newCell.y = cell.y;
+    //        newCell.hit = 1;
+    //        board.Cells.Add(newCell);
+    //    }
+    //    else
+    //    {
+    //        exist.hit = exist.hit + 1;
+
+    //    }
+    //}
+    #endregion
+
+
     board.Cells = board.Cells.OrderBy(x => x.x).ThenBy(x => x.y).ToList();
     var co = board.Cells.Where(x => x.hit > 1).ToList();
     writeMap(board);
 }
 
-static void writeMap(Board board){
+static void writeMap(Board board)
+{
     int rows = 10;
     int cols = 10;
 
-    for(int i = 0; i < rows; i++)
+    for (int i = 0; i < rows; i++)
     {
-        for(int j = 0; j < cols; j++)
+        
+        
+        for (int j = 0; j < cols; j++)
         {
             var hit = ".";
             var cell = board.Cells.Where(x => x.x == j && x.y == i).FirstOrDefault();
-            if(cell != null)
+            if (cell != null)
             {
                 hit = cell.hit.ToString();
             }
             Console.Write(string.Format("{0}", hit));
         }
         Console.Write(Environment.NewLine);
+
+        
     }
+    Console.Write(Environment.NewLine);
 
 }
+
 
 //Modeler
 class Board
@@ -351,14 +419,25 @@ class cordinate
     public int x { get; set; }
     public int y { get; set; }
     public int hit { get; set; }
-    public cordinate()
+
+}
+ static class Methods
+{
+    public static cordinate CreateCell(int x, int y)
     {
-        hit = 0;
+        cordinate newCell = new cordinate();
+        newCell.y = y;
+        newCell.x = x;
+        newCell.hit = 1;
+        return newCell;
     }
 }
 
 public static class strings
 {
+    public static readonly string own = @"3,1 -> 1,3 
+                                        5,2 -> 3,2";
+
     public static readonly string input = @"0,9 -> 5,9
                             8,0 -> 0,8
                             9,4 -> 3,4
